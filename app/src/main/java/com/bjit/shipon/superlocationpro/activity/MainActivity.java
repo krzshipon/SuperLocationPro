@@ -16,6 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.bjit.shipon.superlocationpro.constants.AppConstants;
 import com.bjit.shipon.superlocationpro.model.Timezone;
 import com.bjit.shipon.superlocationpro.rest.TimezoneApiService;
 import com.bjit.shipon.superlocationpro.utils.GpsUtils;
+import com.bjit.shipon.superlocationpro.utils.ProgressbarUtils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -38,7 +40,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
+
 public class MainActivity extends AppCompatActivity {
+
+
+    ProgressbarUtils progressBar;
+
 
     private FusedLocationProviderClient mFusedLocationClient;
 
@@ -81,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         this.txtLocation = (TextView) findViewById(R.id.tv_country);
         this.tvCountry = (TextView) findViewById(R.id.txtLocation);
         this.btnLocation = (Button) findViewById(R.id.btnLocation);
+        progressBar =new ProgressbarUtils(this);
 
         if(retrofit == null){
             retrofit = new Retrofit.Builder()
@@ -181,6 +190,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getLocation() {
+
+        progressBar.showPopupProgressSpinner(true);
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
@@ -229,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
                         response.body().getFormatted());
                 Log.d("ppp",timezone.toString());
                 tvCountry.setText(timezone.getCountryName());
+                progressBar.showPopupProgressSpinner(false);
             }
 
             @Override
