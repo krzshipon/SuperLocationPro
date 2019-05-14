@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
                         response.body().getTimestamp(),
                         response.body().getFormatted());
                 Log.d("ppp",timezone.toString());
-                tvCountry.setText(timezone.getCountryName());
+                tvCountry.setText("Country: "+timezone.getCountryName());
                 progressBar.showPopupProgressSpinner(false);
             }
 
