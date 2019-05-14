@@ -191,7 +191,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void getLocation() {
 
-        progressBar.showPopupProgressSpinner(true);
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
@@ -217,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     void getCountryFromApi(){
+        progressBar.showPopupProgressSpinner(true);
         Call<Timezone> call =
                 timezoneApiService.getTimezone(API_KEY,RESPONSE_FORMAT,by,wayLatitude,wayLongitude);
 
