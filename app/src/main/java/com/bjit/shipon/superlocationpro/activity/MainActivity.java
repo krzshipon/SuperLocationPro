@@ -16,7 +16,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +23,7 @@ import com.bjit.shipon.superlocationpro.R;
 import com.bjit.shipon.superlocationpro.constants.AppConstants;
 import com.bjit.shipon.superlocationpro.model.Timezone;
 import com.bjit.shipon.superlocationpro.rest.TimezoneApiService;
+import com.bjit.shipon.superlocationpro.service.LocationServicePro;
 import com.bjit.shipon.superlocationpro.utils.GpsUtils;
 import com.bjit.shipon.superlocationpro.utils.ProgressbarUtils;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
                     if (location != null) {
                         wayLatitude = location.getLatitude();
                         wayLongitude = location.getLongitude();
+                        Log.d("ppp",""+location.toString());
                         if (!isContinue) {
                             txtLocation.setText(String.format(Locale.US, "%s - %s", wayLatitude, wayLongitude));
                         } else {
@@ -294,14 +295,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = new Intent(this, LocationServicePro.class);
+        startService(intent);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         registerReceiver(mGpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mGpsSwitchStateReceiver);
+        Intent intent = new Intent(this, LocationServicePro.class);
+        stopService(intent);
     }
 }
