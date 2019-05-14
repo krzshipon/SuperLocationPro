@@ -1,4 +1,4 @@
-package com.bjit.shipon.superlocationpro;
+package com.bjit.shipon.superlocationpro.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.bjit.shipon.superlocationpro.constants.AppConstants;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationRequest;
