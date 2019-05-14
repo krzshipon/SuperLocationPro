@@ -49,7 +49,10 @@ public class GpsUtils {
         //**************************
     }
 
-    // method for turn on GPS
+    /**
+     *  Turn ON GPS without leaving app
+     * @param onGpsListener
+     */
     public void turnGPSOn(final onGpsListener onGpsListener) {
 
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
