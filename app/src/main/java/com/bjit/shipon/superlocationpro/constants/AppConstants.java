@@ -1,4 +1,4 @@
-package com.bjit.shipon.superlocationpro;
+package com.bjit.shipon.superlocationpro.constants;
 
 public class AppConstants {
 
