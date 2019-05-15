@@ -171,7 +171,7 @@ public class LocationServicePro extends Service implements LocationListener, Goo
             criteria.setCostAllowed(true);
 
             String provider = locationManager.getBestProvider(criteria, true);
-            locationManager.requestLocationUpdates(provider, 10000,0, this);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000,0, this);
 
             //getting GPS status
             isGPSEnabled = locationManager

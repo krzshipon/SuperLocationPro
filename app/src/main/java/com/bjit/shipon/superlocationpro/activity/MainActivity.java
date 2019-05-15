@@ -24,6 +24,7 @@ import com.bjit.shipon.superlocationpro.constants.AppConstants;
 import com.bjit.shipon.superlocationpro.model.Timezone;
 import com.bjit.shipon.superlocationpro.rest.TimezoneApiService;
 import com.bjit.shipon.superlocationpro.service.LocationServicePro;
+import com.bjit.shipon.superlocationpro.service.LocationTracker;
 import com.bjit.shipon.superlocationpro.utils.GpsUtils;
 import com.bjit.shipon.superlocationpro.utils.ProgressbarUtils;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -147,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                     if (location != null) {
                         wayLatitude = location.getLatitude();
                         wayLongitude = location.getLongitude();
-                        Log.d("ppp",""+location.toString());
+                        //Log.d("ppp",""+location.toString());
                         if (!isContinue) {
                             txtLocation.setText(String.format(Locale.US, "%s - %s", wayLatitude, wayLongitude));
                         } else {
@@ -174,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
             isContinue = false;
             getLocation();
 
-            Log.d("ppp",""+wayLatitude);
+            //Log.d("ppp",""+wayLatitude);
 
 
         });
@@ -297,7 +298,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(this, LocationServicePro.class);
+        //Intent intent = new Intent(this, LocationServicePro.class);
+        Intent intent = new Intent(this, LocationTracker.class);
+
         startService(intent);
     }
 
@@ -312,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mGpsSwitchStateReceiver);
-        Intent intent = new Intent(this, LocationServicePro.class);
+        Intent intent = new Intent(this, LocationTracker.class);
         stopService(intent);
     }
 }

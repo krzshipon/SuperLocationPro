@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <service android:name=".service.LocationServicePro"/>
+        <service android:name=".service.LocationTracker"/>
     </application>
 
 </manifest>
